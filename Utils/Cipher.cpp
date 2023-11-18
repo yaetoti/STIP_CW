@@ -1,27 +1,8 @@
-﻿#include <Windows.h>
-#include <Console.h>
-#include <Utils.h>
-#include <vector>
+#include "Cipher.h"
 #include <array>
 #include <algorithm>
 #include <numeric>
 #include <random>
-
-constexpr const wchar_t* kInputFile = L"input.txt";
-constexpr const wchar_t* kEncodedFile = L"encoded.txt";
-constexpr const wchar_t* kDecodedFile = L"decoded.txt";
-constexpr const wchar_t* kKeyFile = L"key.txt";
-
-// TODO: 3 analysis algorithms
-
-template <typename Iterator, typename = std::enable_if_t<std::is_integral_v<typename std::iterator_traits<Iterator>::value_type>>>
-void VecPrint(const wchar_t* format, Iterator begin, Iterator end) {
-	for (Iterator it = begin; it != end; ++it) {
-		Console::GetInstance()->WPrintF(format, *it);
-	}
-
-	Console::GetInstance()->WPrintF(L"\n");
-}
 
 std::vector<uint8_t> Encode(const std::vector<uint8_t>& data, uint64_t& key) {
 	std::vector<uint8_t> result(data);
@@ -35,7 +16,7 @@ std::vector<uint8_t> Encode(const std::vector<uint8_t>& data, uint64_t& key) {
 	// Encode data
 	std::for_each(result.begin(), result.end(), [&table](uint8_t& byte) {
 		byte = table[byte];
-	});
+		});
 
 	// Insert table
 	key = std::uniform_int_distribution<uint64_t>(0, result.size())(random);
@@ -59,23 +40,8 @@ std::vector<uint8_t> Decode(const std::vector<uint8_t>& data, uint64_t key) {
 
 	// Decode data
 	std::for_each(result.begin(), result.end(), [&table](uint8_t& byte) {
-		byte = static_cast<uint8_t>(std::distance(table, std::find(table, table + 256, byte)));
-	});
+		byte = static_cast<uint8_t>(std::find(table, table + 256, byte) - table);
+		});
 
 	return result;
-}
-
-int WINAPI wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int) {
-	// Load data & Handle
-	std::vector<uint8_t> data = ReadFile<uint8_t>(kInputFile);
-	uint64_t key = 0;
-	std::vector<uint8_t> encoded = Encode(data, key);
-	std::vector<uint8_t> decoded = Decode(encoded, key);
-
-	// Save data
-	WriteFile(kEncodedFile, encoded);
-	WriteFile<uint64_t>(kKeyFile, { key });
-	WriteFile(kDecodedFile, decoded);
-
-	return 0;
 }

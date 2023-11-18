@@ -365,3 +365,10 @@ FodyWeavers.xsd
 /STIP_CW/encoded.txt
 /STIP_CW/input.txt
 /STIP_CW/key.txt
+/Bruteforce/decoded.txt
+/Bruteforce/encoded.txt
+/Bruteforce/input.txt
+/Cipher/decoded.txt
+/Cipher/encoded.txt
+/Cipher/input.txt
+/Cipher/key.txt

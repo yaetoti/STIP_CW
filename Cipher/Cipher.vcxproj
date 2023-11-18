@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{f5104f03-8eb2-4c46-baaf-d2ba36788282}</ProjectGuid>
-    <RootNamespace>STIPCW</RootNamespace>
+    <ProjectGuid>{6a75e80f-c684-45c5-8a02-15da58406c26}</ProjectGuid>
+    <RootNamespace>Cipher</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

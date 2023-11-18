@@ -1,4 +1,5 @@
 #pragma once
+#include <Console.h>
 #include <vector>
 #include <string>
 #include <fstream>
@@ -39,9 +40,8 @@ void WriteFile(const std::wstring& filename, const std::vector<T>& data) {
     }
 }
 
-template <typename T, typename F,
-    typename = std::enable_if_t<std::conjunction_v<std::is_integral<T>, std::is_unsigned<T>, std::is_integral<F>, std::is_unsigned<F>>>>
-    std::vector<T> VecConvert(const F* data, size_t length) {
+template <typename T, typename F, typename = std::enable_if_t<std::conjunction_v<std::is_integral<T>, std::is_unsigned<T>, std::is_integral<F>, std::is_unsigned<F>>>>
+std::vector<T> VecConvert(const F* data, size_t length) {
     std::vector<T> result((length * sizeof(F) + sizeof(T) - 1) / sizeof(T));
     if (length > 0) {
         result.back() = 0;
@@ -51,8 +51,16 @@ template <typename T, typename F,
     return result;
 }
 
-template <typename T, typename F,
-    typename = std::enable_if_t<std::conjunction_v<std::is_integral<T>, std::is_unsigned<T>, std::is_integral<F>, std::is_unsigned<F>>>>
-    std::vector<T> VecConvert(const std::vector<F>& data) {
+template <typename T, typename F, typename = std::enable_if_t<std::conjunction_v<std::is_integral<T>, std::is_unsigned<T>, std::is_integral<F>, std::is_unsigned<F>>>>
+std::vector<T> VecConvert(const std::vector<F>& data) {
     return VecConvert<T, F>(data.data(), data.size());
+}
+
+template <typename Iterator, typename = std::enable_if_t<std::is_integral_v<typename std::iterator_traits<Iterator>::value_type>>>
+void VecPrint(const wchar_t* format, Iterator begin, Iterator end) {
+    for (Iterator it = begin; it != end; ++it) {
+        Console::GetInstance()->WPrintF(format, *it);
+    }
+
+    Console::GetInstance()->WPrintF(L"\n");
 }
