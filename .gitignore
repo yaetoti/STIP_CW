@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/STIP_CW/decoded.txt
+/STIP_CW/encoded.txt
+/STIP_CW/input.txt
+/STIP_CW/key.txt
