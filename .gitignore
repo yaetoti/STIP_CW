@@ -372,3 +372,6 @@ FodyWeavers.xsd
 /Cipher/encoded.txt
 /Cipher/input.txt
 /Cipher/key.txt
+/KnownFragment/decoded.txt
+/KnownFragment/encoded.txt
+/KnownFragment/input.txt
