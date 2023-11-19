@@ -375,3 +375,7 @@ FodyWeavers.xsd
 /KnownFragment/decoded.txt
 /KnownFragment/encoded.txt
 /KnownFragment/input.txt
+/Statistics/analysis.txt
+/Statistics/decoded.txt
+/Statistics/encoded.txt
+/Statistics/input.txt
