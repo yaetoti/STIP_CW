@@ -81,7 +81,7 @@ int WINAPI wWinMain(HINSTANCE, HINSTANCE, LPWSTR, int) {
     }
 
     Console::GetInstance()->WPrintF(L"\n\n[INFO]: Text 1:\n\n\n");
-    for (auto curr : sorted[0]) {
+    for (auto curr : sorted[1]) {
         Console::GetInstance()->WPrintF(L"\'%c\' %03d: %llu\n", curr.first, curr.first, curr.second);
     }
 
